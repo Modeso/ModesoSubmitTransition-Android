@@ -34,7 +34,7 @@ public class ProgressButton extends CircularProgressButton {
         mContext  = context;
     }
 
-    public void onActionComplete(final Activity activity, final boolean noHistory){
+    public <T> void onActionComplete(final Class<T> className, final boolean noHistory){
 
         this.stopProgress();
 
@@ -62,8 +62,8 @@ public class ProgressButton extends CircularProgressButton {
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                if(activity != null) {
-                    Intent intent = new Intent(mContext, activity.getClass());
+                if(className != null) {
+                    Intent intent = new Intent(mContext, className);
                     if(noHistory) {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     }

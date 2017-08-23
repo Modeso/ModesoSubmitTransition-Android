@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ProgressButton</string>
-    <string name="login">Login</string>
+    <string name="signin">Sign In</string>
+    <string name="signup_text">Don\'t have an account? Sign up</string>
 </resources>
