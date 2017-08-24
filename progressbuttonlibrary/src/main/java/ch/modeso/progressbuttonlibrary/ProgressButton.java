@@ -43,16 +43,26 @@ public class ProgressButton extends CircularProgressButton {
         int height = displayMetrics.heightPixels;
 
         ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0f);
-        disappearAnim.setDuration(1000);
+        disappearAnim.setDuration(1500);
 
         ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",height);
         ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this,"scaleY",height);
-        animScaleX.setDuration(1000);
-        animScaleY.setDuration(1000);
+        animScaleX.setDuration(1500);
+        animScaleY.setDuration(1500);
 
 
         AnimatorSet openMenuAnimatorSet = new AnimatorSet();
         openMenuAnimatorSet.playTogether(disappearAnim,animScaleX,animScaleY);
+
+        if(className != null) {
+            Intent intent = new Intent(mContext, className);
+            if(noHistory) {
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            }
+            mContext.startActivity(intent);
+            ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+
         openMenuAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -62,14 +72,14 @@ public class ProgressButton extends CircularProgressButton {
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                if(className != null) {
-                    Intent intent = new Intent(mContext, className);
-                    if(noHistory) {
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    }
-                    mContext.startActivity(intent);
-                    ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                }
+//                if(className != null) {
+//                    Intent intent = new Intent(mContext, className);
+//                    if(noHistory) {
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    }
+//                    mContext.startActivity(intent);
+//                    ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                }
             }
 
             @Override
