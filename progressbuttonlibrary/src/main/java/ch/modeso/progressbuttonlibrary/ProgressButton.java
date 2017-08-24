@@ -43,12 +43,12 @@ public class ProgressButton extends CircularProgressButton {
         int height = displayMetrics.heightPixels;
 
         ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0f);
-        disappearAnim.setDuration(1500);
+        disappearAnim.setDuration(1000);
 
         ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",height);
         ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this,"scaleY",height);
-        animScaleX.setDuration(1500);
-        animScaleY.setDuration(1500);
+        animScaleX.setDuration(1000);
+        animScaleY.setDuration(1000);
 
 
         AnimatorSet openMenuAnimatorSet = new AnimatorSet();
