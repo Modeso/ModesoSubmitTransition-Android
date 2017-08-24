@@ -42,7 +42,7 @@ public class ProgressButton extends CircularProgressButton {
         ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
 
-        ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",0.9f,0f);
+        ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0f);
         disappearAnim.setDuration(1000);
 
         ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",height);
@@ -68,6 +68,7 @@ public class ProgressButton extends CircularProgressButton {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     }
                     mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
 
