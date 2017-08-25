@@ -77,7 +77,7 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
     private int mStrokeWidth;
     private int mPaddingProgress;
     private float mCornerRadius;
-    private boolean mIndeterminateProgressMode;
+    private boolean mIndeterminateProgressMode = true;
     private boolean mConfigurationChanged;
     private int idleStateStrokeColor = -1;
     private int mIdleStateTextColorAfterClick;
@@ -266,7 +266,7 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
             mIconError = attr.getResourceId(R.styleable.CircularProgressButton_pb_iconError, 0);
             mCornerRadius = attr.getDimension(R.styleable.CircularProgressButton_pb_cornerRadius, 0);
             mPaddingProgress = attr.getDimensionPixelSize(R.styleable.CircularProgressButton_pb_paddingProgress, 0);
-            mIndeterminateProgressMode = attr.getBoolean(R.styleable.CircularProgressButton_pb_isIndeterminate, false);
+            mIndeterminateProgressMode = attr.getBoolean(R.styleable.CircularProgressButton_pb_isIndeterminate, true);
 
             int blue = getColor(R.color.pb_blue);
             int white = getColor(R.color.pb_white);

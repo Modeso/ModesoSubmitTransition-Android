@@ -24,14 +24,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.3"
             android:background="@android:color/transparent" />
 
         <LinearLayout
             android:id="@+id/containerLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.7"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
@@ -50,7 +50,7 @@
                     android:src="@drawable/user_name" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
@@ -87,7 +87,7 @@
 
                 <EditText
                     android:id="@+id/passwordEditText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
@@ -124,13 +124,11 @@
             android:textColor="@color/pb_white"
             android:textSize="18sp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:pb_colorIndicator="@color/pb_grey"
             app:pb_cornerRadius="48dp"
             app:pb_selectorComplete="@color/colorAccent"
             app:pb_selectorError="@color/colorAccent"
+            app:pb_iconError="@drawable/ic_error"
             app:pb_selectorIdle="@color/colorAccent"
             app:pb_textIdle="@string/signin" />
 

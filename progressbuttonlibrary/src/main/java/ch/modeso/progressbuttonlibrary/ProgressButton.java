@@ -6,8 +6,10 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
 
@@ -53,45 +55,15 @@ public class ProgressButton extends CircularProgressButton {
 
         AnimatorSet openMenuAnimatorSet = new AnimatorSet();
         openMenuAnimatorSet.playTogether(disappearAnim,animScaleX,animScaleY);
+        openMenuAnimatorSet.start();
 
         if(className != null) {
             Intent intent = new Intent(mContext, className);
-            if(noHistory) {
+            if (noHistory) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             }
             mContext.startActivity(intent);
             ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
-
-        openMenuAnimatorSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-//                if(className != null) {
-//                    Intent intent = new Intent(mContext, className);
-//                    if(noHistory) {
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    }
-//                    mContext.startActivity(intent);
-//                    ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//                }
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        openMenuAnimatorSet.start();
     }
 }

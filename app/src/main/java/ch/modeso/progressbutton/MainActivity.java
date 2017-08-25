@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mLoginButton = (ProgressButton) findViewById(R.id.loginButton);
-        mLoginButton.setIndeterminateProgressMode(true);
 
         Spannable wordToSpan = new SpannableString(getString(R.string.signup_text));
         wordToSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 23, wordToSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
