@@ -3,6 +3,7 @@ package ch.modeso.progressbuttonlibrary;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -43,20 +44,34 @@ public class ProgressButton extends CircularProgressButton {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        float scaleX = 1+(6*width/this.getHeight());
+        float scaleY = 1+(4*height/this.getHeight());
 
-        ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0f);
+        ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0.7f);
         disappearAnim.setDuration(1000);
 
-        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",height);
-        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this,"scaleY",height);
+        ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",scaleX);
+        ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this,"scaleY",scaleY);
         animScaleX.setDuration(1000);
         animScaleY.setDuration(1000);
 
+        AnimatorSet allAnimationSet = new AnimatorSet();
+        allAnimationSet.playTogether(disappearAnim,animScaleX,animScaleY);
+        allAnimationSet.start();
 
-        AnimatorSet openMenuAnimatorSet = new AnimatorSet();
-        openMenuAnimatorSet.playTogether(disappearAnim,animScaleX,animScaleY);
-        openMenuAnimatorSet.start();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                openAnotherActivity(className, noHistory);
+
+            }
+        }, 400);
+    }
+
+    private <T>  void openAnotherActivity(final Class<T> className, final boolean noHistory){
         if(className != null) {
             Intent intent = new Intent(mContext, className);
             if (noHistory) {

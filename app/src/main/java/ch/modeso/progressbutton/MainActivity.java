@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import ch.modeso.progressbuttonlibrary.ProgressButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     ProgressButton mLoginButton;
     TextView mSignUpTextView;
@@ -29,22 +29,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mLoginButton = (ProgressButton) findViewById(R.id.loginButton);
-
         Spannable wordToSpan = new SpannableString(getString(R.string.signup_text));
         wordToSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 23, wordToSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         mSignUpTextView = (TextView) findViewById(R.id.signup_textView);
         mSignUpTextView.setText(wordToSpan);
-
         mContainerLayout = (LinearLayout) findViewById(R.id.containerLayout);
+        mLoginButton.setOnClickListener(this);
     }
 
-    public void onClickLoginButton(View view) {
+    public void onClick(View view) {
 
         hideSoftKeyboard(this, mContainerLayout);
-
         if (mLoginButton.isIdle()) {
             mLoginButton.showProgress();
 
