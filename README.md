@@ -45,28 +45,26 @@ It enable transite button to loading indecator while doing some actions then sta
 
 - in **XML**
 ```
-  <ch.modeso.progressbuttonlibrary.ProgressButton
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:contentDescription=""
-            android:onClick="onClickLoginButton"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:textAllCaps="false"
-            android:textColor="@color/pb_white"
-            android:textSize="18sp"
+    <ch.modeso.progressbuttonlibrary.ProgressButton
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:contentDescription=""
+        android:textAllCaps="false"
+        android:textColor="@color/pb_white"
+        android:textSize="18sp"
 
-            app:pb_colorIndicator="@color/pb_grey"
-            app:pb_cornerRadius="48dp"
-            app:pb_selectorComplete="@color/colorAccent"
-            app:pb_selectorError="@color/colorAccent"
-            app:pb_selectorIdle="@color/colorAccent"
-            app:pb_textIdle="@string/signin" />
+        app:pb_colorIndicator="@color/pb_grey"
+        app:pb_cornerRadius="48dp"
+        app:pb_iconError="@drawable/ic_error"
+        app:pb_selectorComplete="@color/colorAccent"
+        app:pb_selectorError="@color/colorAccent"
+        app:pb_selectorIdle="@color/colorAccent"
+        app:pb_textIdle="@string/signin" />
 
 ```
 - in **Activity** or **Fragment**
