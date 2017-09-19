@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     mLoginButton.onActionComplete(SecondActivity.class, true);
+                    mContainerLayout.setVisibility(View.INVISIBLE);
+                    mSignUpTextView.setVisibility(View.INVISIBLE);
                 }
             }, 3000);
         } else if (mLoginButton.isErrorOrCompleteOrCancelled()) {
