@@ -1,1 +1,1 @@
-include ':app', ':progressbuttonlibrary'
+include ':ModesoSubmitTransitionDemo', ':ModesoSubmitTransition'
