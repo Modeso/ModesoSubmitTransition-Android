@@ -73,6 +73,7 @@ public class ProgressButton extends CircularProgressButton implements View.OnCli
             }
             this.showProgress();
 
+            //Delay for 1 second to see UI animation if the call response was fast
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -85,10 +86,16 @@ public class ProgressButton extends CircularProgressButton implements View.OnCli
         }
     }
 
+    /**
+     * This method called after action finished with failure
+     */
     public void onFailure(){
         this.showError();
     }
 
+    /**
+     * This method called after action finished successfully
+     */
     public void onSuccess(){
         this.stopProgress();
 

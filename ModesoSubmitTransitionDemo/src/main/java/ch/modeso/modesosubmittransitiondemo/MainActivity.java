@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -23,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements SubmitActionListe
 
     ProgressButton mLoginButton;
     TextView mSignUpTextView;
-    LinearLayout mContainerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SubmitActionListe
     @Override
     public void executeAction() {
 
-        // Her user can execute any action
+        // Here user can execute any action
         // For example calling Google URL using Volley
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
