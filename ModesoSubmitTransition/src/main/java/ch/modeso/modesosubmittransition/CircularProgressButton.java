@@ -33,7 +33,6 @@ import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.StateSet;
 
 
@@ -97,7 +96,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private int mMaxProgress;
     private int mProgress;
-
     private boolean mMorphingInProgress;
 
     @Override
@@ -129,45 +127,35 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private void init(Context context, AttributeSet attributeSet) {
         mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.pb_stroke_width);
-
         initAttributes(context, attributeSet);
-
         mMaxProgress = 100;
         mState = State.IDLE;
         mStateManager = new StateManager(this);
-
         setText(mIdleText);
-
         initIdleStateDrawable();
         setBackgroundCompat(mIdleStateDrawable);
     }
 
     private void initErrorStateDrawable() {
         int colorPressed = getPressedColor(mErrorColorState);
-
         StrokeGradientDrawable drawablePressed = createDrawable(colorPressed);
         mErrorStateDrawable = new StateListDrawable();
-
         mErrorStateDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed.getGradientDrawable());
         mErrorStateDrawable.addState(StateSet.WILD_CARD, background.getGradientDrawable());
     }
 
     private void initCompleteStateDrawable() {
         int colorPressed = getPressedColor(mCompleteColorState);
-
         StrokeGradientDrawable drawablePressed = createDrawable(colorPressed);
         mCompleteStateDrawable = new StateListDrawable();
-
         mCompleteStateDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed.getGradientDrawable());
         mCompleteStateDrawable.addState(StateSet.WILD_CARD, background.getGradientDrawable());
     }
 
     private void initCancelStateDrawable() {
         int colorPressed = getPressedColor(mCancelColorState);
-
         StrokeGradientDrawable drawablePressed = createDrawable(colorPressed);
         mCancelStateDrawable = new StateListDrawable();
-
         mCancelStateDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed.getGradientDrawable());
         mCancelStateDrawable.addState(StateSet.WILD_CARD, background.getGradientDrawable());
     }
@@ -180,12 +168,10 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
         if (background == null) {
             background = createDrawable(colorNormal);
         }
-
         StrokeGradientDrawable drawableDisabled = createDrawable(colorDisabled);
         StrokeGradientDrawable drawableFocused = createDrawable(colorFocused);
         StrokeGradientDrawable drawablePressed = createDrawable(colorPressed);
         mIdleStateDrawable = new StateListDrawable();
-
         mIdleStateDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed.getGradientDrawable());
         mIdleStateDrawable.addState(new int[]{android.R.attr.state_focused}, drawableFocused.getGradientDrawable());
         mIdleStateDrawable.addState(new int[]{-android.R.attr.state_enabled}, drawableDisabled.getGradientDrawable());
@@ -215,7 +201,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
         StrokeGradientDrawable strokeGradientDrawable = new StrokeGradientDrawable(drawable);
         strokeGradientDrawable.setStrokeColor(color);
         strokeGradientDrawable.setStrokeWidth(mStrokeWidth);
-
         return strokeGradientDrawable;
     }
 
@@ -234,7 +219,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
             initCancelStateDrawable();
             setBackgroundCompat(mCancelStateDrawable);
         }
-
         if (mState != State.PROGRESS) {
             super.drawableStateChanged();
         }
@@ -254,24 +238,18 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
             return;
         }
         try {
-
             mIdleText = attr.getString(R.styleable.CircularProgressButton_pb_textIdle);
             mCompleteText = attr.getString(R.styleable.CircularProgressButton_pb_textComplete);
             mCancelText = attr.getString(R.styleable.CircularProgressButton_pb_textCancel);
             mErrorText = attr.getString(R.styleable.CircularProgressButton_pb_textError);
             mProgressText = attr.getString(R.styleable.CircularProgressButton_pb_textProgress);
-
             mIconComplete = attr.getResourceId(R.styleable.CircularProgressButton_pb_iconComplete, 0);
             mIconCancel = attr.getResourceId(R.styleable.CircularProgressButton_pb_iconCancel, 0);
             mIconError = attr.getResourceId(R.styleable.CircularProgressButton_pb_iconError, 0);
             mCornerRadius = attr.getDimension(R.styleable.CircularProgressButton_pb_cornerRadius, 0);
             mPaddingProgress = attr.getDimensionPixelSize(R.styleable.CircularProgressButton_pb_paddingProgress, 0);
             mIndeterminateProgressMode = attr.getBoolean(R.styleable.CircularProgressButton_pb_isIndeterminate, true);
-
             int blue = getColor(R.color.pb_blue);
-            int white = getColor(R.color.pb_white);
-            int grey = getColor(R.color.pb_grey);
-
             int idleStateSelector = attr.getResourceId(R.styleable.CircularProgressButton_pb_selectorIdle,
                     R.color.pb_idle_state_selector);
             mIdleColorState = ContextCompat.getColorStateList(context, idleStateSelector);
@@ -356,7 +334,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
         }
     }
 
-
     public boolean isIndeterminateProgressMode() {
         return mIndeterminateProgressMode;
     }
@@ -369,7 +346,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
         this.mColorIndicator = color;
     }
 
-
     @Override
     protected boolean verifyDrawable(Drawable who) {
         return who == mAnimatedDrawable || super.verifyDrawable(who);
@@ -377,100 +353,71 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private MorphingAnimation createMorphing() {
         mMorphingInProgress = true;
-
         MorphingAnimation animation = new MorphingAnimation(this, background);
         animation.setFromCornerRadius(mCornerRadius);
         animation.setToCornerRadius(mCornerRadius);
-
         animation.setFromWidth(getWidth());
         animation.setToWidth(getWidth());
-
         if (mConfigurationChanged) {
             animation.setDuration(MorphingAnimation.DURATION_INSTANT);
         } else {
             animation.setDuration(MorphingAnimation.DURATION_NORMAL);
         }
-
         mConfigurationChanged = false;
-
         return animation;
     }
 
     private MorphingAnimation createProgressMorphing(float fromCorner, float toCorner, int fromWidth, int toWidth) {
         mMorphingInProgress = true;
-
         MorphingAnimation animation = new MorphingAnimation(this, background);
         animation.setFromCornerRadius(fromCorner);
         animation.setToCornerRadius(toCorner);
-
         animation.setPadding(mPaddingProgress);
-
         animation.setFromWidth(fromWidth);
         animation.setToWidth(toWidth);
-
         if (mConfigurationChanged) {
             animation.setDuration(MorphingAnimation.DURATION_INSTANT);
         } else {
             animation.setDuration(MorphingAnimation.DURATION_NORMAL);
         }
-
         mConfigurationChanged = false;
-
         return animation;
     }
 
     private void morphToProgress() {
         setClickable(false);
-
         int duration = 0;
         if (!mConfigurationChanged) {
             animateIdleStateButtonAfterClick();
             duration = IDLE_STATE_ANIMATION_DURATION_AFTER_CLICK;
-            Log.d("TEST", "duration:" + duration);
         }
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 setWidth(getWidth());
                 setText(mProgressText);
-
                 MorphingAnimation animation = createProgressMorphing(mCornerRadius, getHeight(), getWidth(), getHeight());
-
                 animation.setFromColor(getNormalColor(mIdleColorState));
                 animation.setToColor(mColorProgress);
-                Log.d("TEST", "color:" + mColorProgress);
-                Log.d("TEST", "Radius:" + mCornerRadius + " - Height: " + getHeight() + " - Width: " + getWidth());
-
                 animation.setFromStrokeColor(idleStateStrokeColor == -1 ? getNormalColor(mIdleColorState) : idleStateStrokeColor);
                 animation.setToStrokeColor(mColorIndicatorBackground);
-
                 animation.setListener(getProgressStateListener());
                 animation.start();
             }
         }, duration);
-
     }
 
     private void morphToStopProgress() {
         setClickable(false);
-
         setWidth(getWidth());
-
         MorphingAnimation animation = createProgressMorphing(mCornerRadius, mCornerRadius, getHeight(), getHeight());
-
         animation.setFromColor(getNormalColor(mIdleColorState));
         animation.setToColor(mColorProgress);
-        Log.d("TEST", "*color:" + mColorProgress);
-        Log.d("TEST", "*Radius:" + mCornerRadius + " - Height: " + getHeight() + " - Width: " + getWidth());
-
         animation.setFromStrokeColor(idleStateStrokeColor == -1 ? getNormalColor(mIdleColorState) : idleStateStrokeColor);
         animation.setToStrokeColor(mColorIndicatorBackground);
         animation.start(false);
-
     }
-
 
     private OnAnimationEndListener getProgressStateListener() {
         return new OnAnimationEndListener() {
@@ -487,47 +434,35 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private void morphProgressToComplete() {
         MorphingAnimation animation = createProgressMorphing(getHeight(), mCornerRadius, getHeight(), getWidth());
-
         animation.setFromColor(mColorProgress);
         animation.setToColor(getNormalColor(mCompleteColorState));
-
         animation.setFromStrokeColor(mColorIndicator);
         animation.setToStrokeColor(getNormalColor(mCompleteColorState));
         animation.setTextColor(mColorCompleteText);
         animation.setListener(getCompleteStateListener());
-
         animation.start();
-
     }
 
     private void morphProgressToCancel() {
         MorphingAnimation animation = createProgressMorphing(getHeight(), mCornerRadius, getHeight(), getWidth());
-
         animation.setFromColor(mColorProgress);
         animation.setToColor(getNormalColor(mCancelColorState));
-
         animation.setFromStrokeColor(mColorIndicator);
         animation.setToStrokeColor(getNormalColor(mCancelColorState));
         animation.setTextColor(mColorCancelText);
         animation.setListener(getCancelStateListener());
-
         animation.start();
-
     }
 
     private void morphIdleToComplete() {
         MorphingAnimation animation = createMorphing();
-
         animation.setFromColor(getNormalColor(mIdleColorState));
         animation.setToColor(getNormalColor(mCompleteColorState));
-
         animation.setFromStrokeColor(getNormalColor(mIdleColorState));
         animation.setToStrokeColor(getNormalColor(mCompleteColorState));
         animation.setTextColor(mColorCompleteText);
         animation.setListener(getCompleteStateListener());
-
         animation.start();
-
     }
 
     private void morphIdleToCancel() {
@@ -535,14 +470,11 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
         animation.setFromColor(getNormalColor(mIdleColorState));
         animation.setToColor(getNormalColor(mCancelColorState));
-
         animation.setFromStrokeColor(getNormalColor(mIdleColorState));
         animation.setToStrokeColor(getNormalColor(mCancelColorState));
         animation.setTextColor(mColorCancelText);
         animation.setListener(getCancelStateListener());
-
         animation.start();
-
     }
 
     private OnAnimationEndListener getCompleteStateListener() {
@@ -583,47 +515,35 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private void morphCompleteToIdle() {
         MorphingAnimation animation = createMorphing();
-
         animation.setFromColor(getNormalColor(mCompleteColorState));
         animation.setToColor(getNormalColor(mIdleColorState));
-
         animation.setFromStrokeColor(getNormalColor(mCompleteColorState));
         animation.setToStrokeColor(idleStateStrokeColor == -1 ? getNormalColor(mIdleColorState) : idleStateStrokeColor);
         animation.setTextColor(mColorIdleText);
         animation.setListener(getIdleStateListener());
-
         animation.start();
-
     }
 
     private void morphCancelToIdle() {
         MorphingAnimation animation = createMorphing();
-
         animation.setFromColor(getNormalColor(mCancelColorState));
         animation.setToColor(getNormalColor(mIdleColorState));
-
         animation.setFromStrokeColor(getNormalColor(mCancelColorState));
         animation.setToStrokeColor(idleStateStrokeColor == -1 ? getNormalColor(mIdleColorState) : idleStateStrokeColor);
         animation.setTextColor(mColorIdleText);
         animation.setListener(getIdleStateListener());
-
         animation.start();
-
     }
 
     private void morphErrorToIdle() {
         MorphingAnimation animation = createMorphing();
-
         animation.setFromColor(getNormalColor(mErrorColorState));
         animation.setToColor(getNormalColor(mIdleColorState));
-
         animation.setFromStrokeColor(getNormalColor(mErrorColorState));
         animation.setToStrokeColor(idleStateStrokeColor == -1 ? getNormalColor(mIdleColorState) : idleStateStrokeColor);
         animation.setTextColor(mColorIdleText);
         animation.setListener(getIdleStateListener());
-
         animation.start();
-
     }
 
     private OnAnimationEndListener getIdleStateListener() {
@@ -634,7 +554,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
                 setText(mIdleText);
                 mMorphingInProgress = false;
                 mState = State.IDLE;
-
                 mStateManager.checkState(CircularProgressButton.this);
             }
         };
@@ -642,25 +561,19 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private void morphIdleToError() {
         MorphingAnimation animation = createMorphing();
-
         animation.setFromColor(getNormalColor(mIdleColorState));
         animation.setToColor(getNormalColor(mErrorColorState));
-
         animation.setFromStrokeColor(getNormalColor(mIdleColorState));
         animation.setToStrokeColor(getNormalColor(mErrorColorState));
         animation.setTextColor(mColorErrorText);
         animation.setListener(getErrorStateListener());
-
         animation.start();
-
     }
 
     private void morphProgressToError() {
         MorphingAnimation animation = createProgressMorphing(getHeight(), mCornerRadius, getHeight(), getWidth());
-
         animation.setFromColor(mColorProgress);
         animation.setToColor(getNormalColor(mErrorColorState));
-
         animation.setFromStrokeColor(mColorIndicator);
         animation.setToStrokeColor(getNormalColor(mErrorColorState));
         animation.setTextColor(mColorErrorText);
@@ -688,7 +601,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     private void morphProgressToIdle() {
         MorphingAnimation animation = createProgressMorphing(getHeight(), mCornerRadius, getHeight(), getWidth());
-
         animation.setFromColor(mColorProgress);
         animation.setToColor(getNormalColor(mIdleColorState));
         animation.setTextColor(mColorIdleText);
@@ -701,11 +613,9 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
                 setText(mIdleText);
                 mMorphingInProgress = false;
                 mState = State.IDLE;
-
                 mStateManager.checkState(CircularProgressButton.this);
             }
         });
-
         animation.start();
     }
 
@@ -951,6 +861,10 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
 
     public void stopProgress(){
          morphToStopProgress();
+        if (mAnimatedDrawable != null) {
+            mAnimatedDrawable.stop();
+             setCustomProgress(0);
+        }
     }
 
     private void setDefaults() {
@@ -959,7 +873,6 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
         mRemainingTime = -1;
         customProgress = -1;
     }
-
 
     public boolean isIdle() {
         return (getProgress() == IDLE_STATE_PROGRESS ? true : false);
@@ -991,38 +904,10 @@ public class CircularProgressButton extends AppCompatButton implements OnAnimati
     }
 
     private void animateIdleStateButtonAfterClick() {
-//        int textColorChangeDuration = 0;
-//        ObjectAnimator colorAnim = ObjectAnimator.ofInt(this, "textColor", getNormalColor(this.getTextColors()), mIdleStateTextColorAfterClick);
-//        colorAnim.setDuration(textColorChangeDuration);
-//        colorAnim.setEvaluator(new ArgbEvaluator());
-//        colorAnim.start();
-
-//        ObjectAnimator colorAnim1 = ObjectAnimator.ofInt(this, "textColor", mIdleStateTextColorAfterClick, getNormalColor(this.getTextColors()));
-//        colorAnim1.setDuration(0);
-//        colorAnim1.setStartDelay(IDLE_STATE_ANIMATION_DURATION_AFTER_CLICK - textColorChangeDuration);
-//        colorAnim1.setEvaluator(new ArgbEvaluator());
-//        colorAnim1.setInterpolator(new BounceInterpolator());
-//        colorAnim1.start();
-
         ObjectAnimator bgAnim = ObjectAnimator.ofInt(this, "backgroundColor", getNormalColor(mIdleColorState), mIdleStateBackgroundColorAfterClick);
         bgAnim.setDuration(0);
         bgAnim.setEvaluator(new ArgbEvaluator());
         bgAnim.start();
-
-//        int textSizeAnimationDuration = 0;
-//        ValueAnimator animator = ValueAnimator.ofFloat(textSize, textSize - textSize / 4);
-//        animator.setDuration(textSizeAnimationDuration);
-//        animator.setRepeatCount(1);
-//        animator.setRepeatMode(ValueAnimator.REVERSE);
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                float animatedValue = (float) valueAnimator.getAnimatedValue();
-//                setTextSize(animatedValue);
-//            }
-//        });
-//
-//        animator.start();
     }
 
     public void setOnAnimationUpdateTimeListener(OnAnimationUpdateTimeListener onAnimationUpdateTimeListener) {
