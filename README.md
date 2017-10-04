@@ -69,13 +69,11 @@ It enable transite button to loading indecator while doing some actions then sta
 ```
 - in **Activity** or **Fragment**
 ```
-   - showProgress(): use it to start button transition to loading indicator.
-   - public <T> void onActionComplete(final Class<T> className, final boolean noHistory): use it to strat loading
-   indicator animation to fill the screen and start transition to the next screen, if the second parameter set to
-   true then the next screen will opened with no stack history.
-   - showError(): use it to stop loading indicator animation and transite it to button again with error icon.
-   - isIdle(): use it to check if the button in the ideal stat.
-   - isErrorOrCompleteOrCancelled(): to check if the button in error or complete stat.
+   - setTarget: Set target activity to open after action execution.
+   - setTargetWithoutHistory: Set if target activity will open with history or not
+   - setSubmitAction: Set submition action listener.
+   - onSuccess(): This method called after action finished successfully to start success animation.
+   - onFailure(): This method called after action finished with failure to start failure animation.
 ```
 
 ## Options
