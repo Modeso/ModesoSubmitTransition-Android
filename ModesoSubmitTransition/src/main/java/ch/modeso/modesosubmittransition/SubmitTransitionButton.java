@@ -19,26 +19,27 @@ import ch.modeso.modesosubmittransition.SubmitActionListener.SubmitActionListene
  * Created by RANIA on 17-Aug-17.
  */
 
-public class ProgressButton extends CircularProgressButton implements View.OnClickListener{
+public class SubmitTransitionButton extends CircularProgressButton implements View.OnClickListener{
 
     Context mContext;
     private Class mTargetClass;
     private boolean mTargetWithoutHistory = false;
     private SubmitActionListener mSubmitActionListener;
+    private long mAnimationDuration = 1000;
 
-    public ProgressButton(Context context) {
+    public SubmitTransitionButton(Context context) {
         super(context);
         mContext  = context;
         setOnClickListener(this);
     }
 
-    public ProgressButton(Context context, AttributeSet attrs) {
+    public SubmitTransitionButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext  = context;
         setOnClickListener(this);
     }
 
-    public ProgressButton(Context context, AttributeSet attrs, int defStyle) {
+    public SubmitTransitionButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext  = context;
         setOnClickListener(this);
@@ -62,6 +63,10 @@ public class ProgressButton extends CircularProgressButton implements View.OnCli
 
     public void setSubmitAction(SubmitActionListener mSubmitActionListener) {
         this.mSubmitActionListener = mSubmitActionListener;
+    }
+
+    public void setAnimationDuration(long animationDuration){
+        this.mAnimationDuration = animationDuration;
     }
 
     @Override
@@ -107,12 +112,12 @@ public class ProgressButton extends CircularProgressButton implements View.OnCli
         float scaleY = 1+(4*height/this.getHeight());
 
         ObjectAnimator disappearAnim = ObjectAnimator.ofFloat(this,"alpha",1f,0.8f);
-        disappearAnim.setDuration(1000);
+        disappearAnim.setDuration(mAnimationDuration);
 
         ObjectAnimator animScaleX = ObjectAnimator.ofFloat(this,"scaleX",scaleX);
         ObjectAnimator animScaleY = ObjectAnimator.ofFloat(this,"scaleY",scaleY);
-        animScaleX.setDuration(1000);
-        animScaleY.setDuration(1000);
+        animScaleX.setDuration(mAnimationDuration);
+        animScaleY.setDuration(mAnimationDuration);
 
         AnimatorSet allAnimationSet = new AnimatorSet();
         allAnimationSet.playTogether(disappearAnim,animScaleX,animScaleY);

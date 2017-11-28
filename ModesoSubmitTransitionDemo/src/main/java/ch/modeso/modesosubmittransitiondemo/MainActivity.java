@@ -15,22 +15,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import ch.modeso.modesosubmittransition.ProgressButton;
+import ch.modeso.modesosubmittransition.SubmitTransitionButton;
 import ch.modeso.modesosubmittransition.SubmitActionListener.SubmitActionListener;
 
 public class MainActivity extends AppCompatActivity implements SubmitActionListener{
 
-    ProgressButton mLoginButton;
+    SubmitTransitionButton mLoginButton;
     TextView mSignUpTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLoginButton = (ProgressButton) findViewById(R.id.loginButton);
+        mLoginButton = findViewById(R.id.loginButton);
         mLoginButton.setTarget(SecondActivity.class);
         mLoginButton.setTargetWithoutHistory(true);
         mLoginButton.setSubmitAction(this);
+        mLoginButton.setAnimationDuration(1000);
 
         setSignUpText();
     }
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements SubmitActionListe
     private void setSignUpText(){
         Spannable wordToSpan = new SpannableString(getString(R.string.signup_text));
         wordToSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 23, wordToSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mSignUpTextView = (TextView) findViewById(R.id.signup_textView);
+        mSignUpTextView = findViewById(R.id.signup_textView);
         mSignUpTextView.setText(wordToSpan);
     }
 
