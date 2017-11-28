@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ModesoSubmitTransitionDemo</string>
+    <string name="app_name">Modeso Submit Transition Demo</string>
     <string name="signin">Sign In</string>
     <string name="signup_text">Don\'t have an account? Sign up</string>
     <string name="username">Username</string>
