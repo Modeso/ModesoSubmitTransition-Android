@@ -71,6 +71,7 @@ It enable transite button to loading indecator while doing some actions then sta
 ```
    - setTarget: Set target activity to open after action execution.
    - setTargetWithoutHistory: Set if target activity will open with history or not
+   - setAnimationDuration: Set the duration of the animation in milliseconds.
    - setSubmitAction: Set submition action listener.
    - onSuccess(): This method called after action finished successfully to start success animation.
    - onFailure(): This method called after action finished with failure to start failure animation.
