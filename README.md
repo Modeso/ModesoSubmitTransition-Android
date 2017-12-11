@@ -45,7 +45,7 @@ It enable transite button to loading indecator while doing some actions then sta
 
 - in **XML**
 ```
-    <ch.modeso.modesosubmittransition.ProgressButton
+    <ch.modeso.modesosubmittransition.SubmitTransitionButton
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"

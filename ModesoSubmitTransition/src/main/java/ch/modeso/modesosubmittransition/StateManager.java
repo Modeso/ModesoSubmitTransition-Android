@@ -20,13 +20,13 @@ class StateManager {
     private boolean mIsEnabled;
     private int mProgress;
 
-    public StateManager(CircularProgressButton progressButton) {
-        mIsEnabled = progressButton.isEnabled();
-        mProgress = progressButton.getProgress();
+    public StateManager(CircularProgressButton circularProgressButton) {
+        mIsEnabled = circularProgressButton.isEnabled();
+        mProgress = circularProgressButton.getProgress();
     }
 
-    public void saveProgress(CircularProgressButton progressButton) {
-        mProgress = progressButton.getProgress();
+    public void saveProgress(CircularProgressButton circularProgressButton) {
+        mProgress = circularProgressButton.getProgress();
     }
 
     public boolean isEnabled() {
@@ -37,11 +37,11 @@ class StateManager {
         return mProgress;
     }
 
-    public void checkState(CircularProgressButton progressButton) {
-        if (progressButton.getProgress() != getProgress()) {
-            progressButton.setProgress(progressButton.getProgress());
-        } else if(progressButton.isEnabled() != isEnabled()) {
-            progressButton.setEnabled(progressButton.isEnabled());
+    public void checkState(CircularProgressButton circularProgressButton) {
+        if (circularProgressButton.getProgress() != getProgress()) {
+            circularProgressButton.setProgress(circularProgressButton.getProgress());
+        } else if(circularProgressButton.isEnabled() != isEnabled()) {
+            circularProgressButton.setEnabled(circularProgressButton.isEnabled());
         }
     }
 }
