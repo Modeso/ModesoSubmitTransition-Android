@@ -96,7 +96,7 @@ It enable transite button to loading indecator while doing some actions then sta
 
 ## Credits
 
-ModesoSubmitTransition-Android is owned and maintained by [Modeso](http://modeso.ch) using [Anton Aheichanka](https://dribbble.com/madebyanton)'s design. You can follow them on Twitter at [@modeso_ch](https://twitter.com/modeso_ch) for project updates and releases.
+ModesoSubmitTransition-Android is owned and maintained by [Modeso](http://modeso.ch) using [Anton Aheichanka](https://dribbble.com/madebyanton)'s [design](https://dribbble.com/shots/1945593-Login-Home-Screen). You can follow them on Twitter at [@modeso_ch](https://twitter.com/modeso_ch) for project updates and releases.
 
 ## License
 
